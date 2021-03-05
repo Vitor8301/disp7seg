@@ -18,18 +18,28 @@ char digitos7seg[16] = { 0x3F, 0x06, 0x5B, 0x4F,
 
 void disp7seg_init ( void ) 
 {
-    TRISD = 0x00;
-    
-    PORTD = 0xFF;    delay(500);
-    PORTD = 0x00;    delay(500);
-    PORTD = 0xFF;    delay(500);
-    PORTD = 0x00;    delay(500);
+    ANSELH = 0;
+    TRISB = 0x00;
+    PORTB = 0x00;
 }
 
 
-void disp7seg ( char num )
+void disp7seg ( char c )
 {
-    PORTD = digitos7seg[num]; 
+    if ( c >= 0 && c <= 15 )
+        PORTB = digitos7seg[c]; 
+    else
+        PORTB = 0x00;
 }
+int botao_Up (void)
+{
+    return(PORTDbits.RD3);
+}
+
+int botao_Down (void)
+{
+    return(PORTDbits.RD2);
+}
+
 
 

@@ -13,7 +13,8 @@
 
 void main(void) 
 {
-    char cont = 0;
+    int cont = 0;
+    
     
     disp7seg_init();
     
@@ -21,8 +22,14 @@ void main(void)
     {
         disp7seg( cont );
         delay(500);
-        cont = ++cont % 16;
+        if( botao_Up() == 1)
+        {
+            cont = ++cont % 16;
+        }
+        if( botao_Down() == 1)
+        {
+            cont = --cont % 16;
+        }
     }
     return;
-
 }
